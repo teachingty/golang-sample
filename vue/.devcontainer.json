@@ -1,0 +1,33 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.158.0/containers/go
+{
+	"name": "vue",
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  
+  "forwardPorts": [
+    8080,   
+  ],
+  
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+    
+		"extensions": [
+      "dbaeumer.vscode-eslint",
+      "ms-vscode.vscode-typescript-tslint-plugin",
+      "octref.vetur",
+      "dariofuzinato.vue-peek"
+		]
+	},
+"dockerComposeFile": [
+	"../docker-compose.yml",
+  //"../.devcontainer/docker-compose.yml"
+],
+"service": "vue",
+"workspaceFolder": "/vue",
+"shutdownAction": "none",
+
+"remoteUser": "root"
+
+}

@@ -1,0 +1,15 @@
+#FROM node:15.10-alpine as build-stage
+
+# [Choice] Node.js version: 14, 12, 10
+ARG VARIANT="14-buster"
+FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
+
+WORKDIR /workspace/vue
+COPY . .
+#RUN yarn install
+#RUN apk update $$ \
+#    npm install -g @vue/cli && \
+#    npm i -S serve
+RUN npm install -g @vue/cli
+
+#CMD yarn serve

@@ -1,25 +1,51 @@
 package main
 
 import (
-	"work/handler"
+	"fmt"
+	"net/http"
 
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/gin-gonic/gin"
 )
 
+var currentPostThing *Postthing
+
 func main() {
-	// Echoのインスタンス作る
-	e := echo.New()
+	//初期化
+	currentPostThing = NewPostThing()
 
-	// 全てのリクエストで差し込みたいミドルウェア（ログとか）はここ
-	e.Use(middleware.CORS())
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	r := gin.Default()
+	// getルーティング
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	// postルーティング
+	r.POST("/post", posting)
 
-	// ルーティング
-	e.POST("/yamabiko", handler.YamabikoAPI())
-	// e.OPTIONS("/yamabiko", handler.OptionsCheck())
+	// 起動
+	r.Run(":8088") // 本当はport環境変数で指定した方が良い
+}
 
-	// サーバー起動
-	e.Start(":8000")
+// Postthing is
+type Postthing struct {
+	post1 string
+	post2 int
+}
+
+// NewPostThing is
+func NewPostThing() *Postthing {
+	postthing := &Postthing{
+		post1: "test",
+		post2: 1,
+	}
+	return postthing
+}
+
+// post methodを実装(公式参考)
+func posting(c *gin.Context) {
+	p1 := c.PostForm("post1")
+	p2 := c.PostForm("post2")
+	message := fmt.Sprintf("%v, %v", p1, p2)
+	c.String(http.StatusOK, message)
 }

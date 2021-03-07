@@ -17,7 +17,8 @@
       "dbaeumer.vscode-eslint",
       "ms-vscode.vscode-typescript-tslint-plugin",
       "octref.vetur",
-      "dariofuzinato.vue-peek"
+      "dariofuzinato.vue-peek",
+      "yoyo930021.vuter"
 		]
 	},
 "dockerComposeFile": [

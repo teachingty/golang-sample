@@ -28,6 +28,11 @@
 <script>
   export default{
     name:"game",
+    localStorage:{
+      stringKey:{
+        type:String
+      }
+    },
     data(){
       return {
         msg:"test message 1",
@@ -98,17 +103,29 @@
               break;
            }
         }(myHand,yourHand))
-        //console.log(this.decesion)
-        // document.querySelectorAll('button').forEach(function(btn){
-        //   btn.setAttribute('disabled',true);
-        // });
+        const btns = document.querySelectorAll('button');
+        for (var i =0;i<btns.length; i++){
+          btns[i].setAttribute('disabled',true);
+        }
+        this.storeLocalStorage()
       },
       reset(){
         this.decesion=""
-      }
+        const btns = document.querySelectorAll('button');
+        for (var i =0;i<btns.length; i++){
+          btns[i].removeAttribute('disabled');
+        }
+      },
       // change(e){
       //   this.mainImg = e.target.value
-      // }
+      // }      
+      storeLocalStorage(){
+        this.$localStorage.set("stringKey","test")
+      },
+      deleteLocalStorage(){
+        this.$localStorage.remove("stringKey")
+      }
+
     }
   }
 </script>

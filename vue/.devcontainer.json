@@ -8,27 +8,29 @@
   "forwardPorts": [
     8080,   
   ],
-  
+      
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "octref.vetur",
+    "dariofuzinato.vue-peek",
+    "yoyo930021.vuter"
+  ],
+
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
-    
-		"extensions": [
-      "dbaeumer.vscode-eslint",
-      "ms-vscode.vscode-typescript-tslint-plugin",
-      "octref.vetur",
-      "dariofuzinato.vue-peek",
-      "yoyo930021.vuter"
-		]
 	},
 "dockerComposeFile": [
 	"../docker-compose.yml",
   //"../.devcontainer/docker-compose.yml"
-],
-"service": "vue",
-"workspaceFolder": "/vue",
-"shutdownAction": "none",
+  ],
+  
+  "service": "vue",
+  "workspaceFolder": "/vue",
+  //"shutdownAction": "none",
 
-"remoteUser": "root"
+  "remoteUser": "root"
+
 
 }

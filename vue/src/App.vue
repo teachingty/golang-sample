@@ -8,7 +8,7 @@
     <div class="inner">
       <!-- <game></game>
       <score></score> -->
-      <router-view></router-view>
+      <router-view :scores="scores"></router-view>
     </div>
   </div>
 </template>
@@ -25,7 +25,13 @@
     // },
     data(){
       return {
-      }
-    }
+        tmp_scores : localStorage.getItem(["message"]).split(","),
+      };
+    },
+    created:function(){
+      this.scores=this.tmp_scores || []
+    },
+    methods:{
+    },
   }
 </script>

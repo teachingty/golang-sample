@@ -19,24 +19,15 @@
         <button v-on:click="onSelected" value=2>パー</button>
       </li>
     </ul>
-    <!-- <button v-on:click="showObj">メッセージボタン</button>
-    <input v-model="inputmessage" placeholder="input something">
-    <p>message is: {{ inputmessage }}</p> -->
   </div>
 </template>
 
 <script>
   export default{
     name:"game",
-    localStorage:{
-      stringKey:{
-        type:String
-      }
-    },
+    props:["scores"],
     data(){
       return {
-        msg:"test message 1",
-        inputmessage:"",
         mainImg:"グー",
         timer:null,
         count:0,
@@ -45,27 +36,22 @@
           "チョキ",
           "パー"
         ],
-        decesion:""
+        decesion:"",
       }
     },
     created(){
       this.start();
     },
     watch: {
-
+      
     },
     methods:{
-      // showObj:function(){
-      //   window.alert(this.inputmessage)
-      // },
       start(){
         this.reset()
         clearInterval(this.timer)
         this.timer = setInterval(function() {
           this.count ++
           this.mainImg=this.imglist[this.count%3]
-          // console.log(this.mainImg);
-          // console.log(this.count)
         }.bind(this), 1000);
       },
       onSelected(e){
@@ -77,7 +63,7 @@
             case 0:
               if (yourhand===0){
                 return "あいこ"
-              } else if (yourhand===1) {
+              } else if (yourhand===1){
                 return "勝ち"
               } else if (yourhand===2){
                 return "負け"
@@ -107,7 +93,8 @@
         for (var i =0;i<btns.length; i++){
           btns[i].setAttribute('disabled',true);
         }
-        this.storeLocalStorage()
+        this.scores.push(this.decesion)
+        this.storeLocalStorage(this.scores)
       },
       reset(){
         this.decesion=""
@@ -116,16 +103,9 @@
           btns[i].removeAttribute('disabled');
         }
       },
-      // change(e){
-      //   this.mainImg = e.target.value
-      // }      
-      storeLocalStorage(){
-        this.$localStorage.set("stringKey","test")
-      },
-      deleteLocalStorage(){
-        this.$localStorage.remove("stringKey")
+      storeLocalStorage(v){
+        this.$localStorage.set("message",v)
       }
-
     }
   }
 </script>
